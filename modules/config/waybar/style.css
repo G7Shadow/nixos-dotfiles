@@ -1,0 +1,78 @@
+@import "colors.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetbrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.2rem;
+    min-height: 0;
+}
+
+#custom-nixos {
+    padding: 0 12px;
+    color: @primary;
+    font-size: 3rem;
+}
+
+window#waybar {
+    background: transparent;
+    color: @on_surface;
+}
+
+tooltip {
+    background: alpha(@surface, 0.9);
+    border: 1px solid alpha(@outline, 0.5);
+}
+
+tooltip label {
+    color: @on_surface;
+}
+
+#workspaces button {
+    padding: 10px 10px;
+    margin: 5px;
+    border-radius: 100px;
+    background-color:@background;
+    color: @on_surface;
+}
+
+#workspaces button.focused {
+    background: alpha(@primary, 0.3);
+    border-bottom: 3px solid @primary;
+}
+
+#workspaces button:hover {
+    background: alpha(@secondary, 0.2);
+}
+
+#clock, 
+#battery,
+#pulseaudio,
+#network {
+    padding: 5px 20px;
+    margin: 10px;
+    border-radius: 100px;
+    background-color: @background;
+    color: @on_surface;
+    
+}
+
+#battery.charging {
+    color: @secondary;
+}
+
+#battery.warning {
+    color: @tertiary;
+}
+
+#battery.critical {
+    color: @error;
+}
+
+#pulseaudio.muted {
+    color: alpha(@on_surface, 0.5);
+}
+
+#network.disconnected {
+    color: @error;
+}
