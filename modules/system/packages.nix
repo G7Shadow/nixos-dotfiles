@@ -1,6 +1,4 @@
 {
-  config,
-  lib,
   pkgs,
   ...
 }:
@@ -33,9 +31,10 @@
 
     # Desktop Applications
     firefox
-    discord
     kitty
+    vesktop
     nautilus
+    pywalfox-native
 
     # Hyprland Ecosystem
     dunst

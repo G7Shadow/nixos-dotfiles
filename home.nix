@@ -4,9 +4,10 @@ let
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
     hypr = "hypr";
-    # rofi = "rofi";
+    rofi = "rofi";
     waybar = "waybar";
     kitty = "kitty";
+    matugen = "matugen";
   };
 in
 {

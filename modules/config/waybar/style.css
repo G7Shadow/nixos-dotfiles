@@ -32,7 +32,7 @@ tooltip label {
     padding: 10px 10px;
     margin: 5px;
     border-radius: 100px;
-    background-color:@background;
+    background-color: @background;
     color: @on_surface;
 }
 
@@ -45,7 +45,7 @@ tooltip label {
     background: alpha(@secondary, 0.2);
 }
 
-#clock, 
+#clock,
 #battery,
 #pulseaudio,
 #network {
@@ -54,7 +54,7 @@ tooltip label {
     border-radius: 100px;
     background-color: @background;
     color: @on_surface;
-    
+
 }
 
 #battery.charging {
