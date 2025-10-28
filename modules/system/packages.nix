@@ -23,6 +23,7 @@
     playerctl
     pulsemixer
     pwvucontrol
+    zsh-powerlevel10k
 
     # Multimedia
     ffmpeg

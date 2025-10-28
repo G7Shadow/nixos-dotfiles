@@ -79,11 +79,10 @@
     fwupd.enable = true;
     fstrim.enable = true;
     dbus.enable = true;
-    power-profiles-daemon.enable = true;
+    power-profiles-daemon.enable = false;
     thermald.enable = true;
   };
-
-  powerManagement.powertop.enable = true;
+  powerManagement.cpuFreqGovernor = "performance";
 
   # Gnome Services
   services = {

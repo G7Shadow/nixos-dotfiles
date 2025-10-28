@@ -37,7 +37,7 @@ tooltip label {
 }
 
 #workspaces button.focused {
-    background: alpha(@primary, 0.3);
+    background: alpha(@primary, 7);
     border-bottom: 3px solid @primary;
 }
 

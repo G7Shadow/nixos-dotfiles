@@ -1,7 +1,5 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
+
 {
   programs.zsh = {
     enable = true;
@@ -10,11 +8,9 @@
     enableCompletion = true;
     shellAliases = { };
 
-    # Use initExtra for everything
-    initContent = ''
-      # Source zsh-vi-mode
-      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
+    initExtra = ''
+        
+      # --- Existing config below ---
       # Kitty shell integration
       if test -n "$KITTY_INSTALLATION_DIR"; then
         export KITTY_SHELL_INTEGRATION="enabled"
@@ -23,10 +19,15 @@
         unfunction kitty-integration
       fi
 
-      # Display nitch on shell start with custom options
+      # Display nitch on shell start
       if command -v nitch >/dev/null 2>&1; then
         nitch
       fi
+        
+      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+
+
+
     '';
   };
 
