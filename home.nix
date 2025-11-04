@@ -8,6 +8,7 @@ let
     waybar = "waybar";
     kitty = "kitty";
     matugen = "matugen";
+    nvim = "nvim";
   };
 in
 {
@@ -22,7 +23,6 @@ in
     ./modules/system/packages.nix
     ./modules/config/git/git.nix
     ./modules/config/zsh/zsh.nix
-    ./modules/config/nvim/nixvim.nix
   ];
 
   xdg.configFile = builtins.mapAttrs (name: subpath: {

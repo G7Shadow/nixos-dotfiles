@@ -8,7 +8,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
-    nixvim.url = "github:nix-community/nixvim";
   };
 
   outputs =

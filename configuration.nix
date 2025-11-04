@@ -8,10 +8,14 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [
-    "amd_pstate=active"
-    "processor.max_cstate=5"
-  ];
+  boot.kernelParams = [ "amd_pstate=active" "processor.max_cstate=5" ];
+
+  # Use latest kernel for best AMD support
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  
+  # Enable firmware
+  hardware.enableRedistributableFirmware = true;
 
   nix.gc = {
     automatic = true;
@@ -42,20 +46,21 @@
       xdg-desktop-portal-wlr
     ];
   };
-
+ 
   # X Server
-  services.desktopManager.gnome.enable = true;
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver = {
+  enable = true;
+  videoDrivers = [ "amdgpu" ];
+  desktopManager.gnome.enable = true;
+  }; 
 
-  # Display Manager
+   # Display Manager
   services.displayManager = {
     autoLogin.enable = true;
     autoLogin.user = "jeremyl";
     defaultSession = "hyprland";
     sddm = {
       enable = true;
-      wayland.enable = true;
     };
   };
 
@@ -75,14 +80,24 @@
     bluetooth.enable = true;
   };
 
+      
+  # AMD Graphics & Hardware
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+  };
+
   services = {
     fwupd.enable = true;
     fstrim.enable = true;
     dbus.enable = true;
     power-profiles-daemon.enable = false;
-    thermald.enable = true;
   };
-  powerManagement.cpuFreqGovernor = "performance";
+
+    powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "ondemand";  # or "powersave" for maximum battery
+  };
 
   # Gnome Services
   services = {

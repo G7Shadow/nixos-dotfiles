@@ -11,6 +11,8 @@
     gnumake
     nodejs
     vscode
+    libva
+    libva-utils
 
     # System Utilities
     brightnessctl
@@ -22,8 +24,8 @@
     fzf
     playerctl
     pulsemixer
+    neovim
     pwvucontrol
-    zsh-powerlevel10k
 
     # Multimedia
     ffmpeg
@@ -38,8 +40,8 @@
     pywalfox-native
 
     # Hyprland Ecosystem
-    dunst
     kitty
+    wlogout
     rofi
     waybar
     swww
@@ -58,7 +60,6 @@
     nerd-fonts.jetbrains-mono
 
     # Utilities
-    fastfetch
     nitch
 
     # Optional useful packages
@@ -68,5 +69,7 @@
     jq
     unzip
     git
+lua-language-server
+
   ];
 }

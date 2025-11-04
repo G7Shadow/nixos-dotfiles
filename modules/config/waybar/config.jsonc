@@ -10,8 +10,8 @@
     "modules-right": [
         "network",
         "pulseaudio",
-        "battery",
-        "clock"
+        "clock",
+        "battery"
     ],
     "battery": {
         "states": {
