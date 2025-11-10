@@ -8,14 +8,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [ "amd_pstate=active" "processor.max_cstate=5" ];
-
-  # Use latest kernel for best AMD support
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  
-  # Enable firmware
-  hardware.enableRedistributableFirmware = true;
 
   nix.gc = {
     automatic = true;
@@ -32,7 +24,7 @@
 
   time.timeZone = "America/Jamaica";
 
-  # Hyprland configuration
+  # Enable Hyprland window manager
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -50,7 +42,6 @@
   # X Server
   services.xserver = {
   enable = true;
-  videoDrivers = [ "amdgpu" ];
   desktopManager.gnome.enable = true;
   }; 
 
@@ -78,13 +69,6 @@
     cpu.amd.updateMicrocode = true;
     graphics.enable = true;
     bluetooth.enable = true;
-  };
-
-      
-  # AMD Graphics & Hardware
-  hardware.opengl = {
-    enable = true;
-    driSupport32Bit = true;
   };
 
   services = {
@@ -156,8 +140,6 @@
   nixpkgs.config.allowUnfree = true;
 
   nix.settings = {
-    substituters = [ "https://hyprland.cachix.org" ];
-    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     experimental-features = [
       "nix-command"
       "flakes"

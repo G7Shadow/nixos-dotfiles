@@ -4,7 +4,6 @@
 }:
 {
   home.packages = with pkgs; [
-    # Development
     alejandra
     cmake
     gcc
@@ -13,10 +12,9 @@
     vscode
     libva
     libva-utils
-
-    # System Utilities
     brightnessctl
     htop
+    btop
     tree
     wget
     zoxide
@@ -26,20 +24,16 @@
     pulsemixer
     neovim
     pwvucontrol
-
-    # Multimedia
     ffmpeg
     imagemagick
     obs-studio
-
-    # Desktop Applications
+    feh
     firefox
     kitty
     vesktop
     nautilus
     pywalfox-native
-
-    # Hyprland Ecosystem
+    pywal
     kitty
     wlogout
     rofi
@@ -50,26 +44,27 @@
     cava
     nwg-look
     matugen
-
-    # Gaming
     mangohud
     protonup
-
-    # Fonts & Themes
     bibata-cursors
     nerd-fonts.jetbrains-mono
-
-    # Utilities
     nitch
-
-    # Optional useful packages
     bat
     eza
     fd
     jq
     unzip
     git
-lua-language-server
+    tmux   
+    # Language servers
+    vscode-langservers-extracted
+    java-language-server
+    lua-language-server
+    nil # Nix LSP
+    hyprls
+    python313Packages.python-lsp-server
+  # Add other language servers as needed:
+
 
   ];
 }

@@ -16,10 +16,7 @@ in
   home.homeDirectory = "/home/jeremyl";
   home.stateVersion = "25.05";
 
-  # Enable Home Manager
-  programs.home-manager.enable = true;
-
-  imports = [
+imports = [
     ./modules/system/packages.nix
     ./modules/config/git/git.nix
     ./modules/config/zsh/zsh.nix
@@ -32,6 +29,8 @@ in
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    SUDO_EDITOR = "nvim";
+    VISUAL = "nvim";
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };
 }

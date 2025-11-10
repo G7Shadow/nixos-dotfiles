@@ -6,17 +6,22 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
-    shellAliases = { };
 
+    shellAliases = {
+    v = "nvim";
+    t = "tmux";
+
+    };
+    
     initContent = ''
-          # Kitty shell integration
-          if test -n "$KITTY_INSTALLATION_DIR"; then
-          export KITTY_SHELL_INTEGRATION="enabled"
-          autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
-          kitty-integration
-          unfunction kitty-integration
-          fi
-            if command -v nitch &> /dev/null && [ -z "$NITCH_RAN" ]; then
+    if [[ -n "$KITTY_INSTALLATION_DIR" ]]; then
+        export KITTY_SHELL_INTEGRATION="no-rc"
+        autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
+        kitty-integration
+        unfunction kitty-integration
+    fi
+
+      if command -v nitch &> /dev/null && [ -z "$NITCH_RAN" ]; then
       export NITCH_RAN=1
       nitch
       fi
@@ -37,5 +42,4 @@
     enable = true;
     enableZshIntegration = true;
   };
-
 }

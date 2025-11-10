@@ -1,39 +1,42 @@
-vim.cmd("let g:netrw_liststyle = 3")
+-- options
+--------------------------------------------------------------------------------
+-- Relative and absolute line numbers combined
+vim.opt.number = true
+vim.opt.relativenumber = true
 
-local opt = vim.opt
+-- Keep signcolumn on by default
+vim.opt.signcolumn = 'yes'
 
-opt.relativenumber = true
-opt.number = true
+-- Cursorline
+vim.opt.cursorline = true
 
--- tabs & indentation
-opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
-opt.shiftwidth = 2 -- 2 spaces for indent width
-opt.expandtab = true -- expand tab to spaces
-opt.autoindent = true -- copy indent from current line when starting new one
+-- Show whitespace characters
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
-opt.wrap = false
+-- Search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
--- search settings
-opt.ignorecase = true -- ignore case when searching
-opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
+-- Preview substitutions
+vim.opt.inccommand = 'split'
 
-opt.cursorline = true
+-- Text wrapping
+vim.opt.wrap = true
+vim.opt.breakindent = true
 
--- turn on termguicolors for tokyonight colorscheme to work
--- (have to use iterm2 or any other true color terminal)
-opt.termguicolors = true
-opt.background = "dark" -- colorschemes that can be light or dark will be made dark
-opt.signcolumn = "yes" -- show sign column so that text doesn't shift
+-- Tabstops
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 
--- backspace
-opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
+-- Window splitting
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
--- clipboard
-opt.clipboard:append("unnamedplus") -- use system clipboard as default register
+-- Save undo history
+vim.opt.undofile = true
 
--- split windows
-opt.splitright = true -- split vertical window to the right
-opt.splitbelow = true -- split horizontal window to the bottom
-
--- turn off swapfile
-opt.swapfile = false
+-- Set the default border for all floating windows
+vim.opt.winborder = 'single'
