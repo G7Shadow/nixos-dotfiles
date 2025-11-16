@@ -25,10 +25,10 @@
     neovim
     pwvucontrol
     ffmpeg
+    firefox
     imagemagick
     obs-studio
     feh
-    firefox
     kitty
     vesktop
     nautilus
@@ -42,8 +42,10 @@
     swaynotificationcenter
     wl-clipboard
     cava
+    gamemode
     nwg-look
     matugen
+    hyprpaper
     mangohud
     protonup
     bibata-cursors

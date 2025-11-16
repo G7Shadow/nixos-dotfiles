@@ -8,6 +8,7 @@
         "hyprland/window"
     ],
     "modules-right": [
+        "tray",
         "network",
         "pulseaudio",
         "clock",
@@ -89,5 +90,9 @@
     "custom/nixos": {
         "format": "",
         "tooltip": false
-    }
+    },
+    "tray": {
+    "icon-size": 21,
+    "spacing": 10,
+    },
 }

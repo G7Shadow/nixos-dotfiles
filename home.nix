@@ -9,6 +9,7 @@ let
     kitty = "kitty";
     matugen = "matugen";
     nvim = "nvim";
+    tmux = "tmux";
   };
 in
 {

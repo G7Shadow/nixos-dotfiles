@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }:
+{ pkgs,
+inputs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -18,6 +19,7 @@
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = false;
   nix.optimise.automatic = true;
+   
 
   networking.hostName = "Alpha";
   networking.networkmanager.enable = true;
@@ -35,7 +37,6 @@
     extraPortals = with pkgs; [
       xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
     ];
   };
  
@@ -56,13 +57,39 @@
   };
 
   # Gaming
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-  };
+   programs = {
+      steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = false;
+      extraCompatPackages = [ pkgs.proton-ge-bin ];
 
-  programs.gamemode.enable = true;
-  programs.noisetorch.enable = true;
+      # Enable Steam Input for controller support
+      package = pkgs.steam.override {
+        extraPkgs =
+          pkgs: with pkgs; [
+            # Controller support libraries
+            libusb1
+            udev
+            SDL2
+
+            # Additional libraries for better compatibility
+            xorg.libXcursor
+            xorg.libXi
+            xorg.libXinerama
+            xorg.libXScrnSaver
+            xorg.libXcomposite
+            xorg.libXdamage
+            xorg.libXrender
+            xorg.libXext
+
+            # Fix for Xwayland symbol errors
+            libkrb5
+            keyutils
+          ];
+      };
+    };
+  };
 
   # Hardware
   hardware = {
