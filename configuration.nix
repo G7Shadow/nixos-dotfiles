@@ -1,6 +1,8 @@
-{ pkgs,
-inputs, ... }:
 {
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -19,7 +21,6 @@ inputs, ... }:
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = false;
   nix.optimise.automatic = true;
-   
 
   networking.hostName = "Alpha";
   networking.networkmanager.enable = true;
@@ -39,14 +40,14 @@ inputs, ... }:
       xdg-desktop-portal-gtk
     ];
   };
- 
+
   # X Server
   services.xserver = {
-  enable = true;
-  desktopManager.gnome.enable = true;
-  }; 
+    enable = true;
+    desktopManager.gnome.enable = true;
+  };
 
-   # Display Manager
+  # Display Manager
   services.displayManager = {
     autoLogin.enable = true;
     autoLogin.user = "jeremyl";
@@ -57,17 +58,17 @@ inputs, ... }:
   };
 
   # Gaming
-   programs = {
-      steam = {
+  programs = {
+    steam = {
       enable = true;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = false;
-      extraCompatPackages = [ pkgs.proton-ge-bin ];
+      extraCompatPackages = [pkgs.proton-ge-bin];
 
       # Enable Steam Input for controller support
       package = pkgs.steam.override {
-        extraPkgs =
-          pkgs: with pkgs; [
+        extraPkgs = pkgs:
+          with pkgs; [
             # Controller support libraries
             libusb1
             udev
@@ -105,9 +106,9 @@ inputs, ... }:
     power-profiles-daemon.enable = false;
   };
 
-    powerManagement = {
+  powerManagement = {
     enable = true;
-    cpuFreqGovernor = "ondemand";  # or "powersave" for maximum battery
+    cpuFreqGovernor = "ondemand"; # or "powersave" for maximum battery
   };
 
   # Gnome Services
@@ -162,7 +163,7 @@ inputs, ... }:
   programs.bash.enable = false;
   programs.fish.enable = false;
 
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   services.flatpak.enable = true;
   nixpkgs.config.allowUnfree = true;
 

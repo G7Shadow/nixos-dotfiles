@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     alejandra
     cmake
@@ -25,7 +21,6 @@
     neovim
     pwvucontrol
     ffmpeg
-    firefox
     imagemagick
     obs-studio
     feh
@@ -57,16 +52,14 @@
     jq
     unzip
     git
-    tmux   
+    tmux
     # Language servers
     vscode-langservers-extracted
-    java-language-server
     lua-language-server
+    typescript-language-server
     nil # Nix LSP
     hyprls
-    python313Packages.python-lsp-server
-  # Add other language servers as needed:
-
-
+    # Add other language servers as needed:
+    pyright
   ];
 }

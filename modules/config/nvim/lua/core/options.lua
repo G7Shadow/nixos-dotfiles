@@ -38,5 +38,3 @@ vim.opt.splitbelow = true
 -- Save undo history
 vim.opt.undofile = true
 
--- Set the default border for all floating windows
-vim.opt.winborder = 'single'

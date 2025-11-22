@@ -12,7 +12,7 @@ return {
     vim.cmd.hi('Comment gui=none')
   end,
   opts = {
-    transparent = false,
+    transparent = true,
     styles = {
       sidebars = 'transparent',
       floats = 'transparent',
