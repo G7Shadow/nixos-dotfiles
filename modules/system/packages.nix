@@ -1,65 +1,93 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    alejandra
+    # Dev tools
     cmake
+    nixpkgs-fmt
     gcc
+    opencode
     gnumake
     nodejs
-    vscode
-    libva
-    libva-utils
-    brightnessctl
+    python3
+    unzip
+    git
+    jq
+
+    # Terminals & CLI utilities
+    kitty
     htop
     btop
+    lsof
     tree
     wget
     zoxide
     ripgrep
     fzf
-    playerctl
-    pulsemixer
-    neovim
-    pwvucontrol
+    bat
+    eza
+    fd
+    tmux
+
+    # Media & system utilities
+    libva
+    libva-utils
+    brightnessctl
+    lm_sensors
     ffmpeg
+    pulsemixer
+    pwvucontrol
     imagemagick
     obs-studio
     feh
-    kitty
-    vesktop
     nautilus
-    pywalfox-native
-    pywal
-    kitty
+
+    # Desktop tools (Wayland environment)
+    waybar
+    hyprpaper
     wlogout
     rofi
-    waybar
     swww
     swaynotificationcenter
     wl-clipboard
     cava
-    gamemode
     nwg-look
-    matugen
-    hyprpaper
+    gamemode
     mangohud
-    protonup
+    vesktop
+    wlogout
+
+    # Theming
+    pywal
+    matugen
     bibata-cursors
     nerd-fonts.jetbrains-mono
+
+    # Misc
+    playerctl
     nitch
-    bat
-    eza
-    fd
-    jq
-    unzip
-    git
-    tmux
+    protonup
+
     # Language servers
     vscode-langservers-extracted
     lua-language-server
     typescript-language-server
-    nil # Nix LSP
+    nil
     hyprls
-    # Add other language servers as needed:
     pyright
+
+    # Editors
+    neovim
+    vscode # or vscode-fhs if you need FHS
+
+    # Nixpkgs Search
+    (pkgs.writeShellApplication {
+      name = "ns";
+      runtimeInputs = with pkgs; [
+        fzf
+        (nix-search-tv.overrideAttrs {
+          env.GOEXPERIMENT = "jsonv2";
+        })
+      ];
+      text = ''exec "${pkgs.nix-search-tv.src}/nixpkgs.sh" "$@"'';
+    })
   ];
 }

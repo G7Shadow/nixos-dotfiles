@@ -5,19 +5,19 @@ return { -- Highlight, edit, and navigate code
   -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
   opts = {
     ensure_installed = {
-              "bash",   
-              "c",
-              "cpp",
-              "c_sharp",
-              "css",
-              "html",
-              "java",
-              "javascript",
-              "lua",
-              "json",
-              "python",
-              "nix",
-              "hyprlang"
+      "bash",
+      "c",
+      "cpp",
+      "c_sharp",
+      "css",
+      "html",
+      "java",
+      "javascript",
+      "lua",
+      "json",
+      "python",
+      "nix",
+      "hyprlang"
     },
     -- Autoinstall languages that are not installed
     auto_install = true,

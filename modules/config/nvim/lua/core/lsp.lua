@@ -5,6 +5,7 @@
 -- Blink-cmp capabilities
 local base_caps = vim.lsp.protocol.make_client_capabilities()
 local caps = require("blink.cmp").get_lsp_capabilities(base_caps)
+caps.textDocument.completion.completionItem.snippetSupport = true
 
 -- Defaults applied to EVERY LSP unless overridden
 vim.lsp.config('*', {
@@ -148,7 +149,7 @@ vim.lsp.config['nil_ls'] = {
   settings = {
     ['nil'] = {
       formatting = {
-        command = { "alejandra" },
+        command = { "nixpkgs-fmt" },
       },
     },
   },
@@ -184,6 +185,19 @@ vim.lsp.config['hyprls'] = {
   filetypes = { 'hyprlang' },
   root_markers = { '.git' },
 }
+
+-- Html
+vim.lsp.config['html'] = {
+  cmd = { 'vscode-html-language-server', '--stdio' },
+  filetypes = { 'html', 'templ' },
+  root_markers = { 'package.json', '.git' },
+  settings = {},
+  init_options = {
+    provideFormatter = true,
+    embeddedLanguages = { css = true, javascript = true },
+    configurationSection = { 'html', 'css', 'javascript' },
+  },
+}
 --------------------------------------------------------------------------------
 -- 4. Enable Servers
 --------------------------------------------------------------------------------
@@ -193,3 +207,4 @@ vim.lsp.enable('ts_ls')
 vim.lsp.enable('pyright')
 vim.lsp.enable('nil_ls')
 vim.lsp.enable('hyprls')
+vim.lsp.enable('html')

@@ -149,7 +149,6 @@
   users.users.jeremyl = {
     isNormalUser = true;
     description = "Jeremy Lee";
-    shell = pkgs.zsh; # Set shell at system level
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -159,9 +158,10 @@
   };
 
   # Make Zsh available system-wide
+  environment.shells = with pkgs; [zsh];
+  users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
   programs.bash.enable = false;
-  programs.fish.enable = false;
 
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   services.flatpak.enable = true;
