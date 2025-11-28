@@ -18,8 +18,6 @@
           unfunction kitty-integration
       fi
 
-      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-
       if command -v nitch &> /dev/null && [ -z "$NITCH_RAN" ]; then
       export NITCH_RAN=1
       nitch
@@ -33,6 +31,10 @@
   };
 
   programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+  programs.starship = {
     enable = true;
     enableZshIntegration = true;
   };

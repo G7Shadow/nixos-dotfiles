@@ -57,8 +57,6 @@
 
     # Theming
     pywal
-    zsh-powerlevel10k
-    meslo-lgs-nf
     matugen
     bibata-cursors
     nerd-fonts.jetbrains-mono
