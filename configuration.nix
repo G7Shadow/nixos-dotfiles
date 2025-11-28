@@ -12,6 +12,10 @@
   boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Kernel
+  boot.kernelParams = ["amd_pstate=guided"];
+  boot.kernelModules = ["amdgpu"];
+
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -32,13 +36,17 @@
     enable = true;
     xwayland.enable = true;
   };
-
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
     ];
+  };
+  environment.variables = {
+    WLR_RENDERER = "vulkan";
+    WLR_NO_HARDWARE_CURSORS = "1"; # Vega iGPUs sometimes glitch with cursors
+    NIXOS_OZONE_WL = "1"; # chromium/electron fix
   };
 
   # X Server
@@ -93,43 +101,20 @@
   };
 
   # Hardware
-  hardware = {
-    cpu.amd.updateMicrocode = true;
-    graphics.enable = true;
-    bluetooth.enable = true;
-  };
-
-  services = {
-    fwupd.enable = true;
-    fstrim.enable = true;
-    dbus.enable = true;
-    power-profiles-daemon.enable = false;
-  };
-
-  powerManagement = {
+  hardware.graphics = {
     enable = true;
-    cpuFreqGovernor = "ondemand"; # or "powersave" for maximum battery
-  };
 
-  # Gnome Services
-  services = {
-    dbus.packages = with pkgs; [
-      gcr
-      gnome-settings-daemon
+    extraPackages = with pkgs; [
+      mesa
+      vaapiVdpau
+      libvdpau-va-gl
     ];
-    gnome.gnome-keyring.enable = true;
-    gvfs.enable = true;
+
+    extraPackages32 = with pkgs; [
+      driversi686Linux.mesa
+    ];
   };
 
-  security = {
-    pam.services.login.enableGnomeKeyring = true;
-    polkit.enable = true;
-    rtkit.enable = true;
-  };
-
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  # Sound with pipewire
   services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
@@ -138,12 +123,57 @@
     pulse.enable = true;
     jack.enable = true;
   };
+  services = {
+    fwupd.enable = true;
+    fstrim.enable = true;
+    dbus.enable = true;
+    power-profiles-daemon.enable = false;
+  };
+
+  security = {
+    pam.services.login.enableGnomeKeyring = true;
+    polkit.enable = true;
+    rtkit.enable = true;
+  };
 
   # Configure keymap
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  # PowerManagement Services
+  services.tlp = {
+    enable = true;
+    settings = {
+      # General settings for performance on AC power
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_BOOST_ON_AC = 1;
+      CPU_HWP_DYN_BOOST_ON_AC = 1;
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      PLATFORM_PROFILE_ON_AC = "performance";
+
+      # Balanced settings for battery power
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_BOOST_ON_BAT = 1;
+      CPU_HWP_DYN_BOOST_ON_BAT = 1;
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+      PLATFORM_PROFILE_ON_BAT = "balanced";
+
+      # Optional: Adjust battery charge thresholds if desired
+      # START_CHARGE_THRESH_BAT0 = 75;
+      # STOP_CHARGE_THRESH_BAT0 = 81;
+    };
+  };
+  powerManagement.enable = true;
+  powerManagement.cpuFreqGovernor = "schedutil";
+  systemd.sleep.extraConfig = ''
+    AllowSuspend=no
+    AllowHibernation=no
+    AllowHybridSleep=no
+    AllowSuspendThenHibernate=no
+  '';
 
   # User account with shell managed by NixOS
   users.users.jeremyl = {
