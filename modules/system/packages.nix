@@ -7,7 +7,6 @@
     opencode
     gnumake
     nodejs
-    python3
     unzip
     git
     jq
