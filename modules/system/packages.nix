@@ -53,6 +53,7 @@
     mangohud
     vesktop
     wlogout
+    quickshell
 
     # Theming
     pywal

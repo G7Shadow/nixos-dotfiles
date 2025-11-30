@@ -11,7 +11,6 @@
     };
 
     initContent = ''
-
       if command -v nitch &> /dev/null && [ -z "$NITCH_RAN" ]; then
       export NITCH_RAN=1
       nitch

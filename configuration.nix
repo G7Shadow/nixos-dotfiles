@@ -50,8 +50,8 @@
   };
 
   # X Server
-  services.xserver = {
-    enable = true;
+  services = {
+    xserver.enable = true;
     desktopManager.gnome.enable = true;
   };
 
