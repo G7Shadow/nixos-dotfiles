@@ -11,6 +11,8 @@
     git
     jq
     mesa-demos
+    python3
+
     # Terminals & CLI utilities
     kitty
     htop

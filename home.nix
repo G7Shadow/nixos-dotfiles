@@ -1,18 +1,17 @@
-{ config, ... }:
-let
+{config, ...}: let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/modules/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
     hypr = "hypr";
     rofi = "rofi";
+    quickshell = "quickshell";
     waybar = "waybar";
     kitty = "kitty";
     matugen = "matugen";
     nvim = "nvim";
     tmux = "tmux";
   };
-in
-{
+in {
   home.username = "jeremyl";
   home.homeDirectory = "/home/jeremyl";
   home.stateVersion = "25.05";
@@ -25,11 +24,11 @@ in
 
   xdg.configFile =
     builtins.mapAttrs
-      (name: subpath: {
-        source = create_symlink "${dotfiles}/${subpath}";
-        recursive = true;
-      })
-      configs;
+    (name: subpath: {
+      source = create_symlink "${dotfiles}/${subpath}";
+      recursive = true;
+    })
+    configs;
 
   home.sessionVariables = {
     EDITOR = "nvim";

@@ -130,6 +130,18 @@
     power-profiles-daemon.enable = false;
   };
 
+  services.auto-cpufreq.enable = true;
+  services.auto-cpufreq.settings = {
+    battery = {
+      governor = "powersave";
+      turbo = "never";
+    };
+    charger = {
+      governor = "performance";
+      turbo = "auto";
+    };
+  };
+
   security = {
     pam.services.login.enableGnomeKeyring = true;
     polkit.enable = true;
@@ -143,38 +155,6 @@
   };
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # PowerManagement Services
-  services.tlp = {
-    enable = true;
-    settings = {
-      # General settings for performance on AC power
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_BOOST_ON_AC = 1;
-      CPU_HWP_DYN_BOOST_ON_AC = 1;
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      PLATFORM_PROFILE_ON_AC = "performance";
-
-      # Balanced settings for battery power
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      CPU_BOOST_ON_BAT = 1;
-      CPU_HWP_DYN_BOOST_ON_BAT = 1;
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
-      PLATFORM_PROFILE_ON_BAT = "balanced";
-
-      # Optional: Adjust battery charge thresholds if desired
-      # START_CHARGE_THRESH_BAT0 = 75;
-      # STOP_CHARGE_THRESH_BAT0 = 81;
-    };
-  };
-  powerManagement.enable = true;
-  powerManagement.cpuFreqGovernor = "schedutil";
-  systemd.sleep.extraConfig = ''
-    AllowSuspend=no
-    AllowHibernation=no
-    AllowHybridSleep=no
-    AllowSuspendThenHibernate=no
-  '';
-
   # User account with shell managed by NixOS
   users.users.jeremyl = {
     isNormalUser = true;
@@ -186,6 +166,10 @@
       "audio"
     ];
   };
+  environment.systemPackages = with pkgs; [
+    nfs-utils
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
 
   # Make Zsh available system-wide
   environment.shells = with pkgs; [zsh];

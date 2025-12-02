@@ -20,9 +20,3 @@ remember_window_size no
 confirm_os_window_close 0
 enable-remote-control yes
 sync_to_monitor no
-
-
-# BEGIN_KITTY_THEME
-# Noctalia
-include current-theme.conf
-# END_KITTY_THEME
