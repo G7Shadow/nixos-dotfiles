@@ -43,11 +43,6 @@
       xdg-desktop-portal-gtk
     ];
   };
-  environment.variables = {
-    WLR_RENDERER = "vulkan";
-    WLR_NO_HARDWARE_CURSORS = "1"; # Vega iGPUs sometimes glitch with cursors
-    NIXOS_OZONE_WL = "1"; # chromium/electron fix
-  };
 
   # X Server
   services = {
@@ -133,8 +128,8 @@
   services.auto-cpufreq.enable = true;
   services.auto-cpufreq.settings = {
     battery = {
-      governor = "powersave";
-      turbo = "never";
+      governor = "performance";
+      turbo = "auto";
     };
     charger = {
       governor = "performance";
