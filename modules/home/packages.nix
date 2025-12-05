@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   home.packages = with pkgs; [
     # Dev tools
     alejandra
@@ -53,8 +57,9 @@
     nwg-look
     gamemode
     mangohud
+    inputs.zen-browser.packages.${stdenv.hostPlatform.system}.default
+    inputs.noctalia.packages.${stdenv.hostPlatform.system}.default
     vesktop
-    quickshell
 
     # Theming
     pywal
@@ -65,7 +70,7 @@
     # Misc
     playerctl
     nitch
-    protonup
+    protonup-ng
 
     # Language servers
     vscode-langservers-extracted

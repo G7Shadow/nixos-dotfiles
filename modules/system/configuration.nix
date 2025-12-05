@@ -101,8 +101,8 @@
 
     extraPackages = with pkgs; [
       mesa
-      vaapiVdpau
       libvdpau-va-gl
+      libva-vdpau-driver
     ];
 
     extraPackages32 = with pkgs; [
@@ -125,15 +125,21 @@
     power-profiles-daemon.enable = false;
   };
 
+  # Auto-Cpufreg
   services.auto-cpufreq.enable = true;
   services.auto-cpufreq.settings = {
-    battery = {
-      governor = "performance";
-      turbo = "auto";
-    };
     charger = {
       governor = "performance";
-      turbo = "auto";
+      scaling_min_freq = 1400000; # 1.4 GHz min for responsiveness
+      scaling_max_freq = 2600000; # 2.6 GHz max (base clock)
+      turbo = "auto"; # Enable boost to 3.5 GHz when needed
+    };
+
+    battery = {
+      governor = "schedutil"; # Better for mobile CPUs
+      scaling_min_freq = 400000; # 400 MHz - save power
+      scaling_max_freq = 2600000; # Full performance available
+      turbo = "auto"; # Smart boost management
     };
   };
 
@@ -161,11 +167,6 @@
       "audio"
     ];
   };
-  environment.systemPackages = with pkgs; [
-    nfs-utils
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-  ];
 
   # Make Zsh available system-wide
   environment.shells = with pkgs; [zsh];
