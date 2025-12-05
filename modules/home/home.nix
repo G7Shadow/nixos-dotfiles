@@ -1,10 +1,9 @@
 {config, ...}: let
-  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/modules/config";
+  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/modules/home/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
     hypr = "hypr";
     rofi = "rofi";
-    quickshell = "quickshell";
     waybar = "waybar";
     kitty = "kitty";
     matugen = "matugen";
@@ -17,9 +16,9 @@ in {
   home.stateVersion = "25.05";
 
   imports = [
-    ./modules/system/packages.nix
-    ./modules/config/git/git.nix
-    ./modules/config/zsh/zsh.nix
+    ./packages.nix
+    ./programs/git.nix
+    ./programs/zsh.nix
   ];
 
   xdg.configFile =
@@ -36,4 +35,6 @@ in {
     VISUAL = "nvim";
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };
+
+  programs.home-manager.enable = true;
 }

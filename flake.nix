@@ -1,10 +1,14 @@
 {
-  description = "My Nixos Flake";
+  description = "Alpha NixOS Configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,20 +20,24 @@
     nixpkgs,
     home-manager,
     ...
-  } @ inputs: let
-    system = "x86_64-linux";
-  in {
+  } @ inputs: {
     nixosConfigurations.Alpha = nixpkgs.lib.nixosSystem {
-      inherit system;
+      system = "x86_64-linux";
+      
       specialArgs = {inherit inputs;};
+      
       modules = [
-        ./configuration.nix
+        ./modules/system/configuration.nix
+        
         home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.jeremyl = import ./home.nix;
-          home-manager.backupFileExtension = "backup";
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            backupFileExtension = "backup";
+            extraSpecialArgs = {inherit inputs;};
+            users.jeremyl = import ./modules/home/home.nix;
+          };
         }
       ];
     };

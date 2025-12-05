@@ -54,7 +54,6 @@
     gamemode
     mangohud
     vesktop
-    wlogout
     quickshell
 
     # Theming
@@ -78,7 +77,7 @@
 
     # Editors
     neovim
-    vscode # or vscode-fhs if you need FHS
+    vscode
 
     # Nixpkgs Search
     (pkgs.writeShellApplication {
