@@ -19,6 +19,7 @@ in {
     ./packages.nix
     ./programs/git.nix
     ./programs/zsh.nix
+    ./programs/gtk.nix
   ];
 
   xdg.configFile =
