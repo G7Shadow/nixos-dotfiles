@@ -5,17 +5,11 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./desktop.nix
     ./steam.nix
+    ./power.nix
+    ./boot.nix
   ];
-
-  # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 10;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Kernel
-  boot.kernelParams = ["amd_pstate=active"];
-  boot.kernelModules = ["amdgpu"];
 
   nix.gc = {
     automatic = true;
@@ -31,35 +25,6 @@
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/Jamaica";
-
-  # Enable Hyprland window manager
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal-gtk
-    ];
-  };
-
-  # X Server
-  services = {
-    xserver.enable = true;
-    desktopManager.gnome.enable = true;
-  };
-
-  # Display Manager
-  services.displayManager = {
-    autoLogin.enable = true;
-    autoLogin.user = "jeremyl";
-    defaultSession = "hyprland";
-    sddm = {
-      enable = true;
-    };
-  };
 
   # Hardware
   hardware.graphics = {
@@ -89,21 +54,6 @@
     fstrim.enable = true;
     dbus.enable = true;
     power-profiles-daemon.enable = false;
-  };
-
-  # PowerManagement
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "schedutil";
-
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_performance";
-
-      CPU_BOOST_ON_AC = 1;
-      CPU_BOOST_ON_BAT = 0;
-    };
   };
 
   security = {
