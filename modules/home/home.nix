@@ -20,7 +20,6 @@ in {
     ./programs/git.nix
     ./programs/zsh.nix
     ./programs/gtk.nix
-    ./programs/steam.nix
   ];
 
   xdg.configFile =
