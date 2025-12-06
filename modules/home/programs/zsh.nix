@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -34,10 +34,23 @@
       nfu = "nix flake update ~/nixos-dotfiles";
     };
 
+    # Changed from initContent to initExtra
     initContent = ''
+      # Only run nitch once per session
       if command -v nitch &> /dev/null && [ -z "$NITCH_RAN" ]; then
         export NITCH_RAN=1
         nitch
+      fi
+    '';
+
+    # Optimize completion loading
+    completionInit = ''
+      autoload -Uz compinit
+      # Only check cache once a day
+      if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+        compinit
+      else
+        compinit -C
       fi
     '';
   };

@@ -13,7 +13,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel
-  boot.kernelParams = ["amd_pstate=guided"];
+  boot.kernelParams = ["amd_pstate=active"];
   boot.kernelModules = ["amdgpu"];
 
   nix.gc = {
@@ -60,41 +60,6 @@
     };
   };
 
-  # Gaming
-  programs = {
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = false;
-      extraCompatPackages = [pkgs.proton-ge-bin];
-
-      # Enable Steam Input for controller support
-      package = pkgs.steam.override {
-        extraPkgs = pkgs:
-          with pkgs; [
-            # Controller support libraries
-            libusb1
-            udev
-            SDL2
-
-            # Additional libraries for better compatibility
-            xorg.libXcursor
-            xorg.libXi
-            xorg.libXinerama
-            xorg.libXScrnSaver
-            xorg.libXcomposite
-            xorg.libXdamage
-            xorg.libXrender
-            xorg.libXext
-
-            # Fix for Xwayland symbol errors
-            libkrb5
-            keyutils
-          ];
-      };
-    };
-  };
-
   # Hardware
   hardware.graphics = {
     enable = true;
@@ -125,21 +90,18 @@
     power-profiles-daemon.enable = false;
   };
 
-  # Auto-Cpufreg
-  services.auto-cpufreq.enable = true;
-  services.auto-cpufreq.settings = {
-    charger = {
-      governor = "performance";
-      scaling_min_freq = 1400000; # 1.4 GHz min for responsiveness
-      scaling_max_freq = 2600000; # 2.6 GHz max (base clock)
-      turbo = "auto"; # Enable boost to 3.5 GHz when needed
-    };
+  # PowerManagement
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "schedutil";
 
-    battery = {
-      governor = "schedutil"; # Better for mobile CPUs
-      scaling_min_freq = 400000; # 400 MHz - save power
-      scaling_max_freq = 2600000; # Full performance available
-      turbo = "auto"; # Smart boost management
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_performance";
+
+      CPU_BOOST_ON_AC = 1;
+      CPU_BOOST_ON_BAT = 0;
     };
   };
 

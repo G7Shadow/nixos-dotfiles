@@ -1,10 +1,9 @@
 {...}: {
   programs.git = {
     enable = true;
-    userName = "G7Shadow";
-    userEmail = "l.jeremy.822001@gmail.com";
-    
-    extraConfig = {
+    settings = {
+      user.name = "G7Shadow";
+      user.email = "l.jeremy.822001@gmail.com";
       init.defaultBranch = "main";
       pull.rebase = false;
       core.editor = "nvim";
