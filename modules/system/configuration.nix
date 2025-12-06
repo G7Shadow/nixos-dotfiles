@@ -9,6 +9,8 @@
     ./steam.nix
     ./power.nix
     ./boot.nix
+    ./audio.nix
+    ./services.nix
   ];
 
   nix.gc = {
@@ -41,33 +43,11 @@
     ];
   };
 
-  services.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
-  services = {
-    fwupd.enable = true;
-    fstrim.enable = true;
-    dbus.enable = true;
-    power-profiles-daemon.enable = false;
-  };
-
   security = {
     pam.services.login.enableGnomeKeyring = true;
     polkit.enable = true;
     rtkit.enable = true;
   };
-
-  # Configure keymap
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-  i18n.defaultLocale = "en_US.UTF-8";
 
   # User account with shell managed by NixOS
   users.users.jeremyl = {
@@ -88,7 +68,7 @@
   programs.bash.enable = false;
 
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
-  services.flatpak.enable = true;
+
   nixpkgs.config.allowUnfree = true;
 
   nix.settings = {
