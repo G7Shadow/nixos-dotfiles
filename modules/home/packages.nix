@@ -16,6 +16,7 @@
     jq
     mesa-demos
     python3
+    docker
 
     # Terminals & CLI utilities
     kitty
@@ -59,13 +60,16 @@
     mangohud
     inputs.zen-browser.packages.${stdenv.hostPlatform.system}.default
     inputs.noctalia.packages.${stdenv.hostPlatform.system}.default
+    inputs.quickshell.packages.${stdenv.hostPlatform.system}.default
     vesktop
+    spotify
 
     # Theming
     pywal
     matugen
     bibata-cursors
     nerd-fonts.jetbrains-mono
+    adwaita-icon-theme
 
     # Misc
     playerctl

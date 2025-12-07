@@ -5,6 +5,7 @@
     hypr = "hypr";
     rofi = "rofi";
     waybar = "waybar";
+    quickshell = "quickshell";
     kitty = "kitty";
     matugen = "matugen";
     nvim = "nvim";
@@ -19,7 +20,6 @@ in {
     ./packages.nix
     ./programs/git.nix
     ./programs/zsh.nix
-    ./programs/gtk.nix
   ];
 
   xdg.configFile =

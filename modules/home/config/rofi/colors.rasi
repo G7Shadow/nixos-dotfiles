@@ -8,13 +8,13 @@
     primary-container: #004b71;
     on-primary-container: #cbe6ff;
     secondary: #b8c8d9;
-    secondary-fixed: #d3e4f6;
+    secondary-fixed: #d3e5f6;
     secondary-fixed-dim: #b8c8d9;
     on-secondary: #22323f;
     on-secondary-fixed: #0c1d29;
     on-secondary-fixed-variant: #394956;
     secondary-container: #394956;
-    on-secondary-container: #d3e4f6;
+    on-secondary-container: #d3e5f6;
     tertiary: #d0c0e8;
     tertiary-fixed: #ebdcff;
     tertiary-fixed-dim: #d0c0e8;
@@ -36,7 +36,7 @@
     scrim: #000000;
     inverse-surface: #e0e3e8;
     inverse-on-surface: #2d3135;
-    inverse-primary: #29638a;
+    inverse-primary: #28638a;
     surface-dim: #101417;
     surface-bright: #363a3e;
     surface-container-lowest: #0b0f12;

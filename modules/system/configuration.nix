@@ -5,10 +5,10 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./boot.nix
     ./desktop.nix
     ./steam.nix
     ./power.nix
-    ./boot.nix
     ./audio.nix
     ./services.nix
   ];
