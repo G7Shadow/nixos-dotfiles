@@ -3,7 +3,6 @@
     fwupd.enable = true;
     fstrim.enable = true;
     dbus.enable = true;
-    power-profiles-daemon.enable = false;
   };
   # Configure keymap
   services.xserver.xkb = {

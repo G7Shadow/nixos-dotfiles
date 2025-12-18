@@ -14,7 +14,6 @@
     unzip
     git
     jq
-    mesa-demos
     python3
     docker
 
@@ -63,6 +62,7 @@
     inputs.quickshell.packages.${stdenv.hostPlatform.system}.default
     vesktop
     spotify
+    netflix
 
     # Theming
     pywal

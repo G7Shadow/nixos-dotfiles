@@ -1,24 +1,14 @@
 {...}: {
-  # Enable better CPU scheduling
-  services.system76-scheduler.settings.cfsProfiles.enable = true;
-
-  # Enable TLP for power management
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_BOOST_ON_AC = 1;
-      CPU_BOOST_ON_BAT = 1;
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "performance";
+  services.power-profiles-daemon.enable = false;
+  services.auto-cpufreq.enable = true;
+  services.auto-cpufreq.settings = {
+    battery = {
+      governor = "performance";
+      turbo = "auto";
+    };
+    charger = {
+      governor = "performance";
+      turbo = "auto";
     };
   };
-
-  # Disable GNOME's power manager
-  services.power-profiles-daemon.enable = false;
-
-  # Enable powertop for better power tracking
-  powerManagement.powertop.enable = true;
-
-  # Enable thermald (for Intel CPUs)
-  services.thermald.enable = true;
 }

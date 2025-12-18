@@ -31,16 +31,20 @@
       # NixOS shortcuts
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#Alpha";
       nrt = "sudo nixos-rebuild test --flake ~/nixos-dotfiles#Alpha";
-      nfu = "nix flake update ~/nixos-dotfiles";
+      nfu = "nix flake update";
     };
 
-    # Changed from initContent to initExtra
-    initContent = ''
+    initExtra = ''
       # Only run nitch once per session
       if command -v nitch &> /dev/null && [ -z "$NITCH_RAN" ]; then
         export NITCH_RAN=1
         nitch
       fi
+
+      # Speed up git completion
+      __git_files () {
+        _wanted files expl 'local files' _files
+      }
     '';
 
     # Optimize completion loading
@@ -52,6 +56,10 @@
       else
         compinit -C
       fi
+
+      # Speed up completion
+      zstyle ':completion:*' use-cache on
+      zstyle ':completion:*' cache-path ~/.zsh/cache
     '';
   };
 

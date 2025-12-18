@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./boot.nix
@@ -28,21 +24,6 @@
 
   time.timeZone = "America/Jamaica";
 
-  # Hardware
-  hardware.graphics = {
-    enable = true;
-
-    extraPackages = with pkgs; [
-      mesa
-      libvdpau-va-gl
-      libva-vdpau-driver
-    ];
-
-    extraPackages32 = with pkgs; [
-      driversi686Linux.mesa
-    ];
-  };
-
   security = {
     pam.services.login.enableGnomeKeyring = true;
     polkit.enable = true;
@@ -66,8 +47,6 @@
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
   programs.bash.enable = false;
-
-  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   nixpkgs.config.allowUnfree = true;
 
