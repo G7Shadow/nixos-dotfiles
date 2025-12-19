@@ -31,37 +31,31 @@ in {
     configs;
 
   home.sessionVariables = {
-    # Existing
     EDITOR = "nvim";
     SUDO_EDITOR = "nvim";
     VISUAL = "nvim";
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
 
-    # Performance optimizations
-    # Wayland performance (already partially set in Hyprland)
+    # AMD Vega 3 iGPU optimizations
+    RADV_PERFTEST = "aco"; # ACO shader compiler
+    AMD_VULKAN_ICD = "RADV";
+
+    # Wayland optimizations
     NIXOS_OZONE_WL = "1";
     MOZ_ENABLE_WAYLAND = "1";
 
-    # AMD GPU optimizations
-    RADV_PERFTEST = "aco,ngg"; # Enable ACO compiler and NGG culling
-    AMD_VULKAN_ICD = "RADV"; # Use RADV Vulkan driver
-
-    # Compilation performance
-    MAKEFLAGS = "-j\${toString (builtins.div (builtins.readFile /proc/cpuinfo |> builtins.split \"processor\" |> builtins.length) 2)}"; # Parallel builds
-
-    # Reduce memory fragmentation
+    # Memory optimization (14GB RAM)
     MALLOC_ARENA_MAX = "2";
 
-    # Node.js performance (you have nodejs installed)
-    NODE_OPTIONS = "--max-old-space-size=4096";
+    # Node.js (lighter for 14GB)
+    NODE_OPTIONS = "--max-old-space-size=2048"; # 2GB instead of 4GB
 
-    # Gaming/Proton optimizations
+    # Gaming optimizations for Vega 3
     DXVK_STATE_CACHE_PATH = "\${HOME}/.cache/dxvk";
-    DXVK_HUD = "0"; # Disable HUD for performance
-    PROTON_ENABLE_NVAPI = "0"; # Disable for AMD
-    PROTON_FORCE_LARGE_ADDRESS_AWARE = "1";
+    DXVK_HUD = "0";
+    mesa_glthread = "true";
 
-    # Vulkan optimizations
-    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+    # Compilation (use all 4 threads)
+    MAKEFLAGS = "-j4";
   };
 }
