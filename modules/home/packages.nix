@@ -18,6 +18,7 @@
     docker
 
     # Terminals & CLI utilities
+    alacritty
     kitty
     htop
     btop
@@ -58,7 +59,6 @@
     gamemode
     mangohud
     inputs.zen-browser.packages.${stdenv.hostPlatform.system}.default
-    inputs.noctalia.packages.${stdenv.hostPlatform.system}.default
     inputs.quickshell.packages.${stdenv.hostPlatform.system}.default
     vesktop
     spotify
@@ -74,6 +74,7 @@
     # Misc
     playerctl
     nitch
+    fastfetch
     protonup-ng
 
     # Language servers
@@ -87,17 +88,5 @@
     # Editors
     neovim
     vscode
-
-    # Nixpkgs Search
-    (pkgs.writeShellApplication {
-      name = "ns";
-      runtimeInputs = with pkgs; [
-        fzf
-        (nix-search-tv.overrideAttrs {
-          env.GOEXPERIMENT = "jsonv2";
-        })
-      ];
-      text = ''exec "${pkgs.nix-search-tv.src}/nixpkgs.sh" "$@"'';
-    })
   ];
 }

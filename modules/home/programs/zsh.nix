@@ -34,32 +34,13 @@
       nfu = "nix flake update";
     };
 
-    initExtra = ''
+    initContent = ''
       # Only run nitch once per session
       if command -v nitch &> /dev/null && [ -z "$NITCH_RAN" ]; then
         export NITCH_RAN=1
         nitch
       fi
 
-      # Speed up git completion
-      __git_files () {
-        _wanted files expl 'local files' _files
-      }
-    '';
-
-    # Optimize completion loading
-    completionInit = ''
-      autoload -Uz compinit
-      # Only check cache once a day
-      if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-        compinit
-      else
-        compinit -C
-      fi
-
-      # Speed up completion
-      zstyle ':completion:*' use-cache on
-      zstyle ':completion:*' cache-path ~/.zsh/cache
     '';
   };
 

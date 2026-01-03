@@ -34,28 +34,9 @@ in {
     EDITOR = "nvim";
     SUDO_EDITOR = "nvim";
     VISUAL = "nvim";
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-
-    # AMD Vega 3 iGPU optimizations
-    RADV_PERFTEST = "aco"; # ACO shader compiler
-    AMD_VULKAN_ICD = "RADV";
-
-    # Wayland optimizations
     NIXOS_OZONE_WL = "1";
-    MOZ_ENABLE_WAYLAND = "1";
-
-    # Memory optimization (14GB RAM)
-    MALLOC_ARENA_MAX = "2";
-
-    # Node.js (lighter for 14GB)
-    NODE_OPTIONS = "--max-old-space-size=2048"; # 2GB instead of 4GB
-
-    # Gaming optimizations for Vega 3
-    DXVK_STATE_CACHE_PATH = "\${HOME}/.cache/dxvk";
-    DXVK_HUD = "0";
-    mesa_glthread = "true";
-
-    # Compilation (use all 4 threads)
-    MAKEFLAGS = "-j4";
+    MOZ_DISABLE_RDD_SANDBOX = "1"; # Required for hardware video decode
+    LIBVA_DRIVER_NAME = "radeonsi"; # AMD driver
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };
 }
