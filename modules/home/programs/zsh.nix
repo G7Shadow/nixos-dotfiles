@@ -9,6 +9,7 @@
       # Basic
       v = "nvim";
       t = "tmux";
+      ta = "tmux attach || tmux new"; # Attach or create new session
 
       # Git aliases
       gs = "git status";
@@ -35,12 +36,14 @@
     };
 
     initContent = ''
-      # Only run nitch once per session
-      if command -v nitch &> /dev/null && [ -z "$NITCH_RAN" ]; then
+      # Only run nitch in interactive, non-tmux shells
+      if command -v nitch &> /dev/null && [ -z "$TMUX" ] && [ -z "$NITCH_RAN" ]; then
         export NITCH_RAN=1
         nitch
       fi
 
+      # Fast directory jumping
+      eval "$(zoxide init zsh)"
     '';
   };
 
@@ -57,5 +60,10 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
+    settings = {
+      # Faster starship prompt
+      command_timeout = 500;
+      scan_timeout = 10;
+    };
   };
 }

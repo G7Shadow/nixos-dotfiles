@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./boot.nix
@@ -14,7 +10,6 @@
   ];
 
   nix.gc = {
-    automatic = true;
     dates = "weekly";
     options = "--delete-older-than 14d";
   };
@@ -69,7 +64,6 @@
   programs.zsh.enable = true;
   programs.bash.enable = false;
 
-  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   nixpkgs.config.allowUnfree = true;
 
   nix.settings = {

@@ -14,7 +14,6 @@
     unzip
     git
     jq
-    python3
     docker
 
     # Terminals & CLI utilities
@@ -63,6 +62,7 @@
     vesktop
     spotify
     netflix
+    firefox
 
     # Theming
     pywal
