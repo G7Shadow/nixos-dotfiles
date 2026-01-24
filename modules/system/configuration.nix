@@ -18,7 +18,7 @@
   system.autoUpgrade.allowReboot = false;
   nix.optimise.automatic = true;
 
-  networking.hostName = "Alpha";
+  networking.hostName = "Omega";
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/Jamaica";

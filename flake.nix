@@ -1,5 +1,5 @@
 {
-  description = "Alpha NixOS Configuration";
+  description = "Omega NixOS Configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -19,7 +19,7 @@
       systems = ["x86_64-linux"];
 
       flake = {
-        nixosConfigurations.Alpha = inputs.nixpkgs.lib.nixosSystem {
+        nixosConfigurations.Omega = inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {inherit inputs;};
 

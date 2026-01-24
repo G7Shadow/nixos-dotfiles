@@ -30,8 +30,8 @@
       cd = "z";
 
       # NixOS shortcuts
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#Alpha";
-      nrt = "sudo nixos-rebuild test --flake ~/nixos-dotfiles#Alpha";
+      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#Omega";
+      nrt = "sudo nixos-rebuild test --flake ~/nixos-dotfiles#Omega";
       nfu = "nix flake update";
     };
 
