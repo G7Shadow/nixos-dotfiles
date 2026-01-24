@@ -58,7 +58,6 @@
     gamemode
     mangohud
     inputs.zen-browser.packages.${stdenv.hostPlatform.system}.default
-    inputs.quickshell.packages.${stdenv.hostPlatform.system}.default
     vesktop
     spotify
     netflix
