@@ -61,7 +61,6 @@
     vesktop
     spotify
     netflix
-    firefox
 
     # Theming
     pywal
