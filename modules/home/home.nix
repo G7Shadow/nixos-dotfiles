@@ -1,5 +1,5 @@
 {config, ...}: let
-  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/modules/nixosModules/home/config";
+  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/modules/home/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
     hypr = "hypr";
@@ -39,4 +39,10 @@ in {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };
   
+  programs.home-manager.enable = true;
+  
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+  };
 }

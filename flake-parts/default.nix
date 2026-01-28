@@ -6,7 +6,7 @@
     specialArgs = {inherit inputs;};
     
     modules = [
-      ./nixosModules/system/configuration.nix  
+      ../modules/system/configuration.nix
       
       inputs.home-manager.nixosModules.home-manager
       {
@@ -15,12 +15,14 @@
           useUserPackages = true;
           backupFileExtension = "backup";
           extraSpecialArgs = {inherit inputs;};
-          users.jeremyl = import ./nixosModules/home/home.nix;
+          users.jeremyl = import ../modules/home/home.nix;
         };
       }
       
       inputs.nix-index-database.nixosModules.nix-index
-      {programs.nix-index-database.comma.enable = true;}
+      {
+        programs.nix-index-database.comma.enable = true;
+      }
     ];
   };
 }
