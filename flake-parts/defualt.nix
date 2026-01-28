@@ -6,7 +6,7 @@
     specialArgs = {inherit inputs;};
     
     modules = [
-      ../modules/nixosModules/system/configuration.nix
+      ./nixosModules/system/configuration.nix  
       
       inputs.home-manager.nixosModules.home-manager
       {
@@ -15,7 +15,7 @@
           useUserPackages = true;
           backupFileExtension = "backup";
           extraSpecialArgs = {inherit inputs;};
-          users.jeremyl = import ../modules/nixosModules/home/home.nix;
+          users.jeremyl = import ./nixosModules/home/home.nix;
         };
       }
       
