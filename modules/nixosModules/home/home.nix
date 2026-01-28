@@ -1,5 +1,5 @@
 {config, ...}: let
-  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/modules/home/config";
+  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/modules/nixosModules/home/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
     hypr = "hypr";
@@ -35,8 +35,13 @@ in {
     SUDO_EDITOR = "nvim";
     VISUAL = "nvim";
     NIXOS_OZONE_WL = "1";
-    MOZ_DISABLE_RDD_SANDBOX = "1"; # Required for hardware video decode
-    LIBVA_DRIVER_NAME = "radeonsi"; # AMD driver
+    MOZ_DISABLE_RDD_SANDBOX = "1";
+    LIBVA_DRIVER_NAME = "radeonsi";
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+  };
+  
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
   };
 }
