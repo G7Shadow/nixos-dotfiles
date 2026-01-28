@@ -1,4 +1,14 @@
 {pkgs, ...}: {
+  imports = [
+    ./hardware-configuration.nix
+    ./boot.nix
+    ./desktop.nix
+    ./steam.nix
+    ./power.nix
+    ./audio.nix
+    ./services.nix
+  ];
+
   nix.gc = {
     dates = "weekly";
     options = "--delete-older-than 14d";
