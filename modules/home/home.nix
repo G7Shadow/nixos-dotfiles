@@ -38,11 +38,4 @@ in {
     LIBVA_DRIVER_NAME = "radeonsi";
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };
-  
-  programs.home-manager.enable = true;
-  
-  xdg.userDirs = {
-    enable = true;
-    createDirectories = true;
-  };
 }
