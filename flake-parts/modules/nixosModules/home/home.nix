@@ -5,7 +5,6 @@
     hypr = "hypr";
     rofi = "rofi";
     waybar = "waybar";
-    quickshell = "quickshell";
     kitty = "kitty";
     matugen = "matugen";
     nvim = "nvim";
