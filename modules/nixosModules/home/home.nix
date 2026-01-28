@@ -39,8 +39,4 @@ in {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };
   
-  xdg.userDirs = {
-    enable = true;
-    createDirectories = true;
-  };
 }
